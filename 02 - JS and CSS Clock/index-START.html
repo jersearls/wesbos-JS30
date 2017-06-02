@@ -62,13 +62,40 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all .05s;
+      transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+        
     }
 
-  </style>
+</style>
 
-  <script>
+<script>
 
+const hand = (hand) => document.querySelector(`.${hand}-hand`);
 
-  </script>
+const setDate = (uot) => {
+  const now = new Date();
+  if (uot === 'second')
+    var time = now.getSeconds();
+  else if (uot === 'minute')
+    var time = now.getMinutes();
+  else
+    var time = now.getHours();
+  const timeDegrees = ((time/60) * 360) + 90;
+  hand(uot).style.transform = `rotate(${timeDegrees}deg)`; 
+  console.log(time);
+
+}
+
+const handInterval = (uot, ms) => {
+  setInterval(function() { setDate(uot); }, ms);
+}
+
+handInterval('second', 1000);
+//handInterval('minute', 60000);
+
+</script>
 </body>
 </html>
