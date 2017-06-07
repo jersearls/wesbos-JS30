@@ -34,28 +34,50 @@
 const oldNerds = inventors.filter( (inventor) => 1600 > inventor.year && inventor.year > 1500);
 console.log(oldNerds);
 
-    // Array.prototype.map()
+    // Array.prototype.map()  MAP is immutable and will always return same array length
     // 2. Give us an array of the inventors' first and last names
 const nerdName = inventors.map( (inventor) => `${inventor.first} ${inventor.last}`);
 console.log(nerdName)
 
-    // Array.prototype.sort()
+    // Array.prototype.sort() just sorting two items at a time a and b
     // 3. Sort the inventors by birthdate, oldest to youngest
+// wes answer
+//const nerdSortBirth = inventors.sort( (a,b) => (a.year > b.year) ? 1 : -1);
+
 const nerdSortBirth = inventors.sort( (a,b) => a.year - b.year);
 console.log(nerdSortBirth)
 
-    // Array.prototype.reduce()
+    // Array.prototype.reduce() NEED TO DEFINE ACCUMULATOR!!!
     // 4. How many years did all the inventors live?
-const nerdReduce = inventors.reduce((allInventors, inventor) => (inventor.passed - inventor.year) + allInventors, 0);
+const nerdReduce = inventors.reduce((accumulator, inventor) => (inventor.passed - inventor.year) + accumulator, 0);
 console.log(nerdReduce)
 
     // 5. Sort the inventors by years lived
+//wes answer
+//const nerdSortAge = inventors.sort( (a,b) => {
+//  const lastGuy = a.passed - a.year;
+//  const nextGuy = b.passed - b.year;
+//  (lastGuy > nextGuy) ? 1 : -1);
+//}
+
 const nerdSortAge = inventors.sort( (a,b) => (a.passed - a.year) - (b.passed - b.year));
 console.log(nerdSortAge)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 //   .filter()  'does X have de? true/false'
+
+//const category = document.querySelector('.mw-category');
+//
+//// can call query selector against any existing dom element, not just document
+//// creates a 'node-list', diff properties than an array, limited functions
+////convert node-list to array
+//
+//const links = Array.from(category.querySelectorAll('a'));
+//
+//const de = links.map(link => link.textContent);
+//
+//const deList = de.filter( (road) => road.includes('de'));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
@@ -70,6 +92,7 @@ console.log(nerdSortName)
 //const count = data.reduce((accumulator, transport) =>
 //  ( transport in accumulator ) ? accumulator[transport]++ : accumulator[transport] = 1, {});
 
+// ++ increments value by 1
 const count = data.reduce(function (accumulator, transport) {
   ( transport in accumulator ) ? accumulator[transport]++ : accumulator[transport] = 1;
   return accumulator;
